@@ -2,7 +2,7 @@ import cv2
 from flask import Flask, Response
 import threading
 import numpy as np
-from models.video_model import VideoModel
+from ui.thermal_camera.thermal_camera import VideoModel
 from senxor.mi48 import MI48, format_header, format_framestats
 from senxor.utils import data_to_frame, remap, cv_filter, RollingAverageFilter, connect_senxor
 
@@ -17,20 +17,30 @@ class HomeController:
         print("RGB feed button clicked")
         self.show_camera_feed(0)  # Assuming RGB camera is at index 0
 
+    def handle_stop_rgb_feed(self):
+        print("Stop RGB feed button clicked")
+        self.stop_camera_feed()
+
     def handle_thermal_feed(self):
         print("Thermal feed button clicked")
         if self.thermal_camera is None:
             self.thermal_camera = ThermalCamera()
             threading.Thread(target=self.thermal_camera.start_stream, daemon=True).start()
 
+    def handle_stop_thermal_feed(self):
+        print("Stop Thermal feed button clicked")
+        if self.thermal_camera is not None:
+            self.thermal_camera.stop()
+            self.thermal_camera = None
+
     def show_camera_feed(self, camera_index):
-        cap = cv2.VideoCapture(camera_index)
-        if not cap.isOpened():
+        self.cap = cv2.VideoCapture(camera_index)
+        if not self.cap.isOpened():
             print(f"Error: Could not open camera {camera_index}")
             return
 
         while True:
-            ret, frame = cap.read()
+            ret, frame = self.cap.read()
             if not ret:
                 print("Error: Failed to capture image")
                 break
@@ -40,8 +50,13 @@ class HomeController:
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
 
-        cap.release()
+        self.cap.release()
         cv2.destroyAllWindows()
+
+    def stop_camera_feed(self):
+        if hasattr(self, 'cap') and self.cap.isOpened():
+            self.cap.release()
+            cv2.destroyAllWindows()
 
 class ThermalCamera:
     def __init__(self, roi=(0, 0, 61, 61), com_port=None):

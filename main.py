@@ -1,16 +1,13 @@
-#there is delay when running , add logging to diagnose the delay
-
-from PyQt5.QtWidgets import QApplication
 import sys
-from controllers.controllerAPI import HomeController
-from models.video_model import VideoModel
-from ui.main_window import HomeView
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtCore import QTimer
+from ui.main_window import MainWindow
 
 def main():
     app = QApplication(sys.argv)
-    model = VideoModel()
-    view = HomeView()
-    controller = HomeController(model, view)
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec_())
 
 if __name__ == "__main__":
-    main() 
+    main()
