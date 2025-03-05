@@ -29,6 +29,7 @@ class MainWindow(QMainWindow):
     def load_home_page(self):
         self.home_page = HomeView(self)
         self.stacked_widget.addWidget(self.home_page)
+        self.switch_to_home_()
 
     #def load_loading_screen(self):
     #    self.loading_screen = (self)

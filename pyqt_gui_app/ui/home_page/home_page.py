@@ -1,8 +1,7 @@
 # filepath: /c:/Users/yyash/Documents/GitHub/PyQt_GUI/pyqt_gui_app/ui/home_page/home_page.py
 from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel, QInputDialog 
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QInputDialog
 from PyQt5.QtCore import QSize
-#from models.serial_model import SerialModel
 
 class HomeView(QWidget):
     def __init__(self, main_window):
@@ -17,7 +16,7 @@ class HomeView(QWidget):
 
     def load_ui(self):
         try:
-            uic.loadUi('PyQt_GUI/pyqt_gui_app/ui/home_page/home_page.ui', self)
+            uic.loadUi('pyqt_gui_app/ui/home_page/home_page.ui', self)
             print("UI file loaded successfully")
         except Exception as e:
             print(f"Failed to load UI file: {e}")
@@ -26,7 +25,7 @@ class HomeView(QWidget):
     def init_ui(self):
         self.setWindowTitle("SLS Camera Feed")
         self.setGeometry(100, 100, 400, 300)  # Set the window size to 400x300 (x,y width x height)
-        self.setStyleSheet("background-color: red;")  # Set the background color to orange
+        self.setStyleSheet("background-color: red;")  # Set the background color to red
         
         layout = QVBoxLayout()
         button_layout = QVBoxLayout()

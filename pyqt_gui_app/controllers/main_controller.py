@@ -2,7 +2,7 @@ from models.PrinterStatus import PrintStatus
 
 class MainController:
     def __init__(self):
-        self.serial_model = SerialModel()
+        self.heater_controller = SerialModel()
         self.print_status = PrintStatus()
 
     def send_command(self, command):
