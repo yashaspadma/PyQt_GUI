@@ -1,4 +1,3 @@
-from models.serial_model import SerialModel
 from models.PrinterStatus import PrintStatus
 
 class MainController:

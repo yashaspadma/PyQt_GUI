@@ -1,3 +1,4 @@
+# filepath: /c:/Users/yyash/Documents/GitHub/PyQt_GUI/pyqt_gui_app/ui/home_page/home_page.py
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel, QInputDialog 
 from PyQt5.QtCore import QSize
@@ -10,10 +11,13 @@ class HomeView(QWidget):
 
         # Load the .ui file
         self.load_ui()
+        
+        # Initialize the UI elements
+        self.init_ui()
 
     def load_ui(self):
         try:
-            uic.loadUi('ControlCenter-main/src/ui/home_screen/home_screen.ui', self)
+            uic.loadUi('PyQt_GUI/pyqt_gui_app/ui/home_page/home_page.ui', self)
             print("UI file loaded successfully")
         except Exception as e:
             print(f"Failed to load UI file: {e}")

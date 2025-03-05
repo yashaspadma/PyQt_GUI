@@ -2,8 +2,6 @@ from PyQt5.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QStackedWidget
 from ui.home_page.home_page import HomeView
 from ui.heater_controller.heater_controller import SerialModel
 from ui.thermal_camera.thermal_camera import VideoModel
-#from ui.settings_screen.settings_screen import SettingsScreen
-#import ui.resources.resource_rc  # Ensure resources are loaded
 import traceback
 
 class MainWindow(QMainWindow):
@@ -30,19 +28,19 @@ class MainWindow(QMainWindow):
 
     def load_home_page(self):
         self.home_page = HomeView(self)
-        self.stacked_widget.addWidget(self.home_screen)
+        self.stacked_widget.addWidget(self.home_page)
 
     #def load_loading_screen(self):
     #    self.loading_screen = (self)
     #    self.stacked_widget.addWidget(self.loading_screen)
     
     def load_heater_controller(self):
-        self.load_heater_controller = SerialModel(self)
-        self.stacked_widget.addWidget(self.menu_screen)
+        self.heater_controller = SerialModel(self)
+        self.stacked_widget.addWidget(self.heater_controller)
 
     def load_thermal_camera(self):
-        self.settings_screen = VideoModel(self)
-        self.stacked_widget.addWidget(self.settings_screen)
+        self.thermal_camera = VideoModel(self)
+        self.stacked_widget.addWidget(self.thermal_camera)
 
     def switch_screen(self, widget):
         print(f"Switching to screen: {widget}")
